@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="wxpj"
+  id="myeclipse.1514270545195"
+  context-root="/wxpj"
+  j2ee-spec="5.0"
+  archive="wxpj.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

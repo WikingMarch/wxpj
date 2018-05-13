@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script type="text/javascript" src="js/amazeui.min.js"></script>
+		<link rel="stylesheet" href="css/amazeui.min.css" type="text/css" />
+		<link rel="stylesheet" href="css/style.css" type="text/css" />
+	</head>
+	<body>
+		<header data-am-widget="header" class="am-header am-header-default jz">
+		      <div class="am-header-left am-header-nav">
+		         <a href="javascript:history.back()" class="">
+					<i class="am-icon-chevron-left"></i>
+				</a>
+		      </div>
+		      <h1 class="am-header-title">
+		          <a href="#title-link" class="">登录</a>
+		      </h1>
+        </header>
+        <div class="logo"><img src="images/logo.png"/></div>
+       <form id="form1" action="userLogin_PW.do" method="post">
+        <input type="text" name="tel" id="nickname" placeholder="请输入手机号" class="login-name">
+      
+        <div class="am-input-group" style="width:100%; margin:5px">
+        <input type="password" name="password" id="password" placeholder="请输入密码" class="login-name">
+      
+        </div>
+        <div class="login-text" style="width:100%; margin:5px">
+        <input type="radio" name="type" id="radio1" value="1">学生登录
+      <input type="radio" name="type" id="radio2" value="2">维修人员登录 
+      <input type="radio" name="type" id="radio3" value="3">管理员登录
+        </div>
+        
+		<input type="button" value="登录" id="btn1" class="money-btn"  >
+		</form>
+		<p class="login-text"> 没有账号？点此<a href="reg.jsp" class="reg">注册</a>
+        <a href="pwdfind.html" class="password">忘记密码</a><a href="login_code.html"   class="password"><font color="#01aff0">短信验证码登录</font></a>
+    </p>
+	</body>
+	<script type="text/javascript">
+	
+$("#btn1").click(function (){
+
+var j=-1;
+  var radio = document.getElementsByName("type");  
+    for (i=0; i<radio.length; i++) {  
+        if (radio[i].checked) {  
+j=i;
+        }  
+    }  
+   
+    if(j==0)
+{$("#form1").attr('action','userLogin_PW.do');
+$("#form1").submit();
+}
+else if(j==1)
+{$("#form1").attr('action','wxrLogin_PW.do');
+
+$("#form1").submit();
+}
+});
+
+</script>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script type="text/javascript" src="js/amazeui.min.js"></script>
+		<link rel="stylesheet" href="css/amazeui.min.css" type="text/css" />
+		<link rel="stylesheet" href="css/style.css" type="text/css" />
+	</head>
+	<body>
+		<header data-am-widget="header" class="am-header am-header-default jz">
+		      <div class="am-header-left am-header-nav">
+		         <a href="javascript:history.back()" class="">
+					<i class="am-icon-chevron-left"></i>
+				</a>
+		      </div>
+		      <h1 class="am-header-title">
+		          <a href="#title-link" class="">验证码登录</a>
+		      </h1>
+        </header>
+        <div class="logo"><img src="images/logo.png"/></div>
+        <form id="form1" action="userLogin_Tel.do" method="post">
+        <input type="text" id="tel" name="tel" placeholder="请输入手机号" class="login-password">
+        <div class="yzm">
+	    	<input type="text" id="code" name="code" maxlength="6" class="reg-yzm" placeholder="输入验证码">
+	    	<input type="button" class="yzm-hq" name="code_btn" id="code_btn" value="获取验证码">
+	    </div>
+	    
+	    <input type="button" id="submit_btn" class="login-btn" value="立即登录">
+	    </form>
+	</body>
+	
+	
+	   <script type="text/javascript">  
+    //定义一个二维数组  
+ 
+     
+        
+         $(document).ready(function() {
+           $("#submit_btn").click(function() {
+             var tel=$("#tel").val();
+        
+           if($("#code").val()=="")
+           alert("请输入验证码");
+           else 
+            if(isPoneAvailable(tel)==false){
+        alert("不是合法手机号，请重输！");}
+        else
+            $("#form1").submit();
+            
+            
+            
+           
+           
+           
+           });
+         
+         
+    $("#code_btn").click(function() {
+        var tel=$("#tel").val();
+        if(isPoneAvailable(tel)==false){
+        alert("不是合法手机号，请重输！");
+        }else{
+        
+        
+         $.ajax({
+            url : "getLoginCode.do",    //目标地址
+            data : "tel=" +tel,    //传输的数据
+            type : "POST",      // 用POST方式传输 
+            dataType : "text",    // 数据格式
+            success : function(data) {
+                data = parseInt(data, 10);
+               if(data==0)
+               {
+               alert("该手机号未注册！");
+             
+               }else
+               {
+           
+                
+                var btn=$("#code_btn");
+                settime(btn);
+               } 
+            }
+      
+        });
+        }
+    });
+    
+    
+}); 
+
+var  countdown=60;
+  function settime(obj) { //发送验证码倒计时
+  
+    if (countdown == 0) { 
+   
+        obj.attr('disabled',false); 
+        //obj.removeattr("disabled"); 
+        obj.val("获取验证码");
+        countdown = 60; 
+        return;
+    } else { 
+    
+        obj.attr('disabled',true);
+        obj.val("重新发送(" + countdown + ")");
+        countdown--; 
+    } 
+setTimeout(function() {settime(obj);},1000);
+}      
+     function isPoneAvailable(str) {  
+          var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;  
+          if (!myreg.test(str)) {  
+              return false;  
+          } else {  
+              return true;  
+          }  
+      }      
+    </script>  
+	
+</html>
